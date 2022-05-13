@@ -3,7 +3,15 @@ include_once("conn.php");
 
 // konfigurasi pagination
 $jumlahDataPerHalaman = 100;
-$jumlahData = count(query("SELECT * FROM btc order by id desc"));
+if (isset($_GET["search"])) {
+    $search = $_GET["search"];
+    $sql = "SELECT * FROM btc WHERE jenis LIKE '%".$search."%' ORDER BY id DESC";
+    $param2 = "&search=".$search;
+} else {
+    $sql = "SELECT * FROM btc ORDER BY id DESC";
+    $param2 = "";
+}
+$jumlahData = count(query($sql));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
 // superset range of pages
@@ -21,7 +29,7 @@ if ($halamanAktif - 3 < 1) {
 $awalData = ( $jumlahDataPerHalaman * $halamanAktif ) - $jumlahDataPerHalaman;
 
 // ambil data
-$results = query("SELECT * FROM btc order by id desc LIMIT $awalData, $jumlahDataPerHalaman");
+$results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
 ?>
 <!doctype html>
 <html lang="en">
@@ -34,6 +42,8 @@ $results = query("SELECT * FROM btc order by id desc LIMIT $awalData, $jumlahDat
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <!-- My CSS -->
     <link rel="stylesheet" href="style.css">
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>Penambangan Sinyal Harian INDODAX</title>
   </head>
@@ -41,8 +51,18 @@ $results = query("SELECT * FROM btc order by id desc LIMIT $awalData, $jumlahDat
     <div class="container">
         <h1 class="text-center">Penambangan Sinyal Harian INDODAX</h1>
 
+        <!-- card pencarian -->
+        <div class="card mt-5">
+            <div class="card-body">
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" id="search" name="search" placeholder="Cari" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Cari</button>
+                </form>
+            </div>
+        </div>
+
         <!-- card table -->
-        <div class="card mt-5 mb-5">
+        <div class="card mt-4 mb-5">
             <div class="card-body">
                 <table class="table">
                     <thead>
@@ -336,13 +356,13 @@ $results = query("SELECT * FROM btc order by id desc LIMIT $awalData, $jumlahDat
                     <ul class="pagination justify-content-center">
                         <!-- halaman pertama -->
                         <li class="page-item">
-                            <a class="page-link" href="?halaman=1">Pertama</a>
+                            <a class="page-link" href="?halaman=1<?= $param2; ?>">Pertama</a>
                         </li>
 
                         <!-- tombol prev -->
                         <?php if($halamanAktif > 1) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?>" aria-label="Previous">
+                                <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?><?= $param2; ?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -361,9 +381,9 @@ $results = query("SELECT * FROM btc order by id desc LIMIT $awalData, $jumlahDat
 
                         <?php foreach($subset_range as $p) : ?>
                             <?php if($p == $halamanAktif) : ?>
-                                <li class="page-item active"><a class="page-link" href="?halaman=<?= $p ?>"><?= $p ?></a></li>
+                                <li class="page-item active"><a class="page-link" href="?halaman=<?= $p ?><?= $param2; ?>"><?= $p ?></a></li>
                             <?php else : ?>
-                                <li class="page-item"><a class="page-link" href="?halaman=<?= $p ?>"><?= $p ?></a></li>
+                                <li class="page-item"><a class="page-link" href="?halaman=<?= $p ?><?= $param2; ?>"><?= $p ?></a></li>
                             <?php endif; ?>
                         <?php endforeach; ?>
 
@@ -374,7 +394,7 @@ $results = query("SELECT * FROM btc order by id desc LIMIT $awalData, $jumlahDat
                         <!-- tombol next -->
                         <?php if($halamanAktif < $jumlahHalaman) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?>" aria-label="Next">
+                                <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?><?= $param2; ?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -388,7 +408,7 @@ $results = query("SELECT * FROM btc order by id desc LIMIT $awalData, $jumlahDat
 
                         <!-- halaman terakhir -->
                         <li class="page-item">
-                            <a class="page-link" href="?halaman=<?= $jumlahHalaman; ?>">Terakhir</a>
+                            <a class="page-link" href="?halaman=<?= $jumlahHalaman; ?><?= $param2; ?>">Terakhir</a>
                         </li>
                     </ul>
                 </nav>
@@ -408,5 +428,12 @@ $results = query("SELECT * FROM btc order by id desc LIMIT $awalData, $jumlahDat
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- My JS -->
+    <script src="./script.js"></script>
   </body>
 </html>
