@@ -1,16 +1,22 @@
 <?php
 include_once("conn.php");
 
-// konfigurasi pagination
-$jumlahDataPerHalaman = 100;
+$sql = "SELECT * FROM btc ORDER BY id DESC";
+
+// search for pagination
 if (isset($_GET["search"])) {
     $search = $_GET["search"];
     $sql = "SELECT * FROM btc WHERE jenis LIKE '%".$search."%' ORDER BY id DESC";
     $param2 = "&search=".$search;
 } else {
-    $sql = "SELECT * FROM btc ORDER BY id DESC";
     $param2 = "";
 }
+
+// filter date
+include_once("filter.php");
+
+// konfigurasi pagination
+$jumlahDataPerHalaman = 100;
 $jumlahData = count(query($sql));
 $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
 $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
@@ -44,6 +50,8 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
     <link rel="stylesheet" href="style.css">
     <!-- jQuery UI -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Date Range Picker -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <title>Penambangan Sinyal Harian INDODAX</title>
   </head>
@@ -61,9 +69,24 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
             </div>
         </div>
 
+        <!-- card filter -->
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Rentang tanggal</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="filterDate" name="filterDate">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-primary" id="dateSubmit">Aktifkan</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- card table -->
         <div class="card mt-4 mb-5">
-            <div class="card-body">
+            <div class="card-body" id="table-data">
                 <table class="table">
                     <thead>
                         <tr>
@@ -356,13 +379,13 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                     <ul class="pagination justify-content-center">
                         <!-- halaman pertama -->
                         <li class="page-item">
-                            <a class="page-link" href="?halaman=1<?= $param2; ?>">Pertama</a>
+                            <a class="page-link" href="?halaman=1<?= $param2; ?><?= $param3; ?>">Pertama</a>
                         </li>
 
                         <!-- tombol prev -->
                         <?php if($halamanAktif > 1) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?><?= $param2; ?>" aria-label="Previous">
+                                <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?><?= $param2; ?><?= $param3; ?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -381,9 +404,9 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
 
                         <?php foreach($subset_range as $p) : ?>
                             <?php if($p == $halamanAktif) : ?>
-                                <li class="page-item active"><a class="page-link" href="?halaman=<?= $p ?><?= $param2; ?>"><?= $p ?></a></li>
+                                <li class="page-item active"><a class="page-link" href="?halaman=<?= $p ?><?= $param2; ?><?= $param3; ?>"><?= $p ?></a></li>
                             <?php else : ?>
-                                <li class="page-item"><a class="page-link" href="?halaman=<?= $p ?><?= $param2; ?>"><?= $p ?></a></li>
+                                <li class="page-item"><a class="page-link" href="?halaman=<?= $p ?><?= $param2; ?><?= $param3; ?>"><?= $p ?></a></li>
                             <?php endif; ?>
                         <?php endforeach; ?>
 
@@ -394,7 +417,7 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                         <!-- tombol next -->
                         <?php if($halamanAktif < $jumlahHalaman) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?><?= $param2; ?>" aria-label="Next">
+                                <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?><?= $param2; ?><?= $param3; ?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -408,7 +431,7 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
 
                         <!-- halaman terakhir -->
                         <li class="page-item">
-                            <a class="page-link" href="?halaman=<?= $jumlahHalaman; ?><?= $param2; ?>">Terakhir</a>
+                            <a class="page-link" href="?halaman=<?= $jumlahHalaman; ?><?= $param2; ?><?= $param3; ?>">Terakhir</a>
                         </li>
                     </ul>
                 </nav>
@@ -432,6 +455,10 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- date range picker -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <!-- My JS -->
     <script src="./script.js"></script>
