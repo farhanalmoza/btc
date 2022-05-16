@@ -19,12 +19,22 @@ if (isset($_GET["signal_min"]) && isset($_GET["signal_max"])) {
     $param .= "";
 }
 
-// filter by harga
+// filter by harga idr
 if (isset($_GET["harga_min"]) && isset($_GET["harga_max"])) {
     $harga_min = $_GET["harga_min"];
     $harga_max = $_GET["harga_max"];
     $sql = "SELECT * FROM btc WHERE hargaidr BETWEEN ".$harga_min." AND ".$harga_max." ORDER BY id DESC";
     $param .= "&harga_min=".$harga_min."&harga_max=".$harga_max;
+} else {
+    $param .= "";
+}
+
+// filter by harga usd
+if (isset($_GET["harga_usd_min"]) && isset($_GET["harga_usd_max"])) {
+    $harga_usd_min = $_GET["harga_usd_min"];
+    $harga_usd_max = $_GET["harga_usd_max"];
+    $sql = "SELECT * FROM btc WHERE hargausdt BETWEEN ".$harga_usd_min." AND ".$harga_usd_max." ORDER BY id DESC";
+    $param .= "&harga_usd_min=".$harga_usd_min."&harga_usd_max=".$harga_usd_max;
 } else {
     $param .= "";
 }

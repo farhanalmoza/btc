@@ -43,13 +43,22 @@ $(document).ready(function() {
         $("#toSinyal").val(signalMax);
     }
 
-    // jika ada get filter rentang harga
+    // jika ada get filter rentang harga IDR
     if ($_GET['harga_min'] && $_GET['harga_max']) {
         var hargaMin = $_GET['harga_min'];
         var hargaMax = $_GET['harga_max'];
 
         $("#hargaMin").val(hargaMin);
         $("#hargaMax").val(hargaMax);
+    }
+
+    // jika ada get filter rentang harga USD
+    if ($_GET['harga_usd_min'] && $_GET['harga_usd_max']) {
+        var hargaUsdMin = $_GET['harga_usd_min'];
+        var hargaUsdMax = $_GET['harga_usd_max'];
+
+        $("#hargaMinUSD").val(hargaUsdMin);
+        $("#hargaMaxUSD").val(hargaUsdMax);
     }
 
 })
@@ -75,12 +84,22 @@ $("#sinyalSubmit").click(function(){
     }
 });
 
-// event saat klik tombol filter rentang harga
+// event saat klik tombol filter rentang harga IDR
 $("#hargaSubmit").click(function(){
     // ambil nilai dari input
     var fromHarga = $("#hargaMin").val();
     var toHarga = $("#hargaMax").val();
     if (fromHarga != "" && toHarga != "") {
         location.href = "./index.php?harga_min=" + fromHarga + "&harga_max=" + toHarga;
+    }
+});
+
+// event saat klik tombol filter rentang harga USD
+$("#hargaUSDSubmit").click(function(){
+    // ambil nilai dari input
+    var fromHarga = $("#hargaMinUSD").val();
+    var toHarga = $("#hargaMaxUSD").val();
+    if (fromHarga != "" && toHarga != "") {
+        location.href = "./index.php?harga_usd_min=" + fromHarga + "&harga_usd_max=" + toHarga;
     }
 });

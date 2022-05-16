@@ -108,9 +108,9 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                         <button type="button" class="btn btn-primary" id="sinyalSubmit">Aktifkan</button>
                     </div>
                 </div>
-                <!-- rentang harga -->
+                <!-- rentang harga IDR -->
                 <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label">Harga</label>
+                    <label class="col-sm-2 col-form-label">Harga (IDR)</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="hargaMin" name="hargaMin">
                     </div>
@@ -120,6 +120,20 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                     </div>
                     <div class="col-sm-2">
                         <button type="button" class="btn btn-primary" id="hargaSubmit">Aktifkan</button>
+                    </div>
+                </div>
+                <!-- rentang harga USD -->
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Harga (USD)</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="hargaMinUSD" name="hargaMinUSD">
+                    </div>
+                    <div class="col-sm-1 text-center">to</div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="hargaMaxUSD" name="hargaMaxUSD">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-primary" id="hargaUSDSubmit">Aktifkan</button>
                     </div>
                 </div>
             </div>
