@@ -77,7 +77,7 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                 <!-- rentang tanggal -->
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Rentang tanggal</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" id="filterDate" name="filterDate">
                     </div>
                     <div class="col-sm-2">
@@ -87,7 +87,7 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                 <!-- level -->
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Level</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-7">
                         <input type="text" class="form-control" id="filterLevel" name="filterLevel">
                     </div>
                     <div class="col-sm-2">
@@ -106,6 +106,20 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                     </div>
                     <div class="col-sm-2">
                         <button type="button" class="btn btn-primary" id="sinyalSubmit">Aktifkan</button>
+                    </div>
+                </div>
+                <!-- rentang harga -->
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Harga</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="hargaMin" name="hargaMin">
+                    </div>
+                    <div class="col-sm-1 text-center">to</div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="hargaMax" name="hargaMax">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-primary" id="hargaSubmit">Aktifkan</button>
                     </div>
                 </div>
             </div>

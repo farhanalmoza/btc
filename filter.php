@@ -19,4 +19,14 @@ if (isset($_GET["signal_min"]) && isset($_GET["signal_max"])) {
     $param .= "";
 }
 
+// filter by harga
+if (isset($_GET["harga_min"]) && isset($_GET["harga_max"])) {
+    $harga_min = $_GET["harga_min"];
+    $harga_max = $_GET["harga_max"];
+    $sql = "SELECT * FROM btc WHERE hargaidr BETWEEN ".$harga_min." AND ".$harga_max." ORDER BY id DESC";
+    $param .= "&harga_min=".$harga_min."&harga_max=".$harga_max;
+} else {
+    $param .= "";
+}
+
 ?>

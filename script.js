@@ -43,6 +43,15 @@ $(document).ready(function() {
         $("#toSinyal").val(signalMax);
     }
 
+    // jika ada get filter rentang harga
+    if ($_GET['harga_min'] && $_GET['harga_max']) {
+        var hargaMin = $_GET['harga_min'];
+        var hargaMax = $_GET['harga_max'];
+
+        $("#hargaMin").val(hargaMin);
+        $("#hargaMax").val(hargaMax);
+    }
+
 })
 
 // event saat klik tombol filter date
@@ -63,5 +72,15 @@ $("#sinyalSubmit").click(function(){
     var toSinyal = $("#toSinyal").val();
     if (fromSinyal != "" && toSinyal != "") {
         location.href = "./index.php?signal_min=" + fromSinyal + "&signal_max=" + toSinyal;
+    }
+});
+
+// event saat klik tombol filter rentang harga
+$("#hargaSubmit").click(function(){
+    // ambil nilai dari input
+    var fromHarga = $("#hargaMin").val();
+    var toHarga = $("#hargaMax").val();
+    if (fromHarga != "" && toHarga != "") {
+        location.href = "./index.php?harga_min=" + fromHarga + "&harga_max=" + toHarga;
     }
 });
