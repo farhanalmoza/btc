@@ -61,6 +61,34 @@ $(document).ready(function() {
         $("#hargaMaxUSD").val(hargaUsdMax);
     }
 
+    // ambil daftar level
+    $.ajax({
+        url: "./getLevel.php",
+        type: "POST",
+        dataType: "json",
+        success: function(data) {
+            const levels = [];
+            data.forEach(element => {
+                levels.push(element.level);
+            });
+
+            // unikkan daftar level
+            var uniqueLevels = [...new Set(levels)];
+            
+            // tambahkan option pada select level
+            uniqueLevels.forEach(element => {
+                $("#level").append(`<option value="${element}">${element}</option>`);
+            });
+
+            // jika ada get filter level
+            if ($_GET['level']) {
+                var level = $_GET['level'];
+
+                $("#level").val(level);
+            }
+        }
+    })
+
 })
 
 // event saat klik tombol filter date
@@ -101,5 +129,14 @@ $("#hargaUSDSubmit").click(function(){
     var toHarga = $("#hargaMaxUSD").val();
     if (fromHarga != "" && toHarga != "") {
         location.href = "./index.php?harga_usd_min=" + fromHarga + "&harga_usd_max=" + toHarga;
+    }
+});
+
+// event saat klik tombol filter level
+$("#levelSubmit").click(function(){
+    // ambil nilai dari input
+    var level = $("#level").val();
+    if (level != "") {
+        location.href = "./index.php?level=" + level;
     }
 });

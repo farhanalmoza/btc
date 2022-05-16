@@ -88,7 +88,9 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Level</label>
                     <div class="col-sm-7">
-                        <input type="text" class="form-control" id="filterLevel" name="filterLevel">
+                    <select class="form-select" id="level">
+                        <option>Pilih level</option>
+                    </select>
                     </div>
                     <div class="col-sm-2">
                         <button type="button" class="btn btn-primary" id="levelSubmit">Aktifkan</button>

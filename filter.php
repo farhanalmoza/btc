@@ -39,4 +39,13 @@ if (isset($_GET["harga_usd_min"]) && isset($_GET["harga_usd_max"])) {
     $param .= "";
 }
 
+// filter by level
+if (isset($_GET["level"])) {
+    $level = $_GET["level"];
+    $sql = "SELECT * FROM btc WHERE level = '".$level."' ORDER BY id DESC";
+    $param .= "&level=".$level;
+} else {
+    $param .= "";
+}
+
 ?>
