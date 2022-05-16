@@ -3,13 +3,15 @@ include_once("conn.php");
 
 $sql = "SELECT * FROM btc ORDER BY id DESC";
 
+$param = "";
+
 // search for pagination
 if (isset($_GET["search"])) {
     $search = $_GET["search"];
     $sql = "SELECT * FROM btc WHERE jenis LIKE '%".$search."%' ORDER BY id DESC";
-    $param2 = "&search=".$search;
+    $param .= "&search=".$search;
 } else {
-    $param2 = "";
+    $param .= "";
 }
 
 // filter date
@@ -72,6 +74,7 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
         <!-- card filter -->
         <div class="card mt-4">
             <div class="card-body">
+                <!-- rentang tanggal -->
                 <div class="mb-3 row">
                     <label class="col-sm-2 col-form-label">Rentang tanggal</label>
                     <div class="col-sm-8">
@@ -79,6 +82,30 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                     </div>
                     <div class="col-sm-2">
                         <button type="button" class="btn btn-primary" id="dateSubmit">Aktifkan</button>
+                    </div>
+                </div>
+                <!-- level -->
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Level</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="filterLevel" name="filterLevel">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-primary" id="levelSubmit">Aktifkan</button>
+                    </div>
+                </div>
+                <!-- rentang sinyal -->
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Sinyal</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="fromSinyal" name="fromSinyal">
+                    </div>
+                    <div class="col-sm-1 text-center">to</div>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="toSinyal" name="toSinyal">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-primary" id="sinyalSubmit">Aktifkan</button>
                     </div>
                 </div>
             </div>
@@ -379,13 +406,13 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                     <ul class="pagination justify-content-center">
                         <!-- halaman pertama -->
                         <li class="page-item">
-                            <a class="page-link" href="?halaman=1<?= $param2; ?><?= $param3; ?>">Pertama</a>
+                            <a class="page-link" href="?halaman=1<?= $param; ?>">Pertama</a>
                         </li>
 
                         <!-- tombol prev -->
                         <?php if($halamanAktif > 1) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?><?= $param2; ?><?= $param3; ?>" aria-label="Previous">
+                                <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?><?= $param; ?>" aria-label="Previous">
                                     <span aria-hidden="true">&laquo;</span>
                                 </a>
                             </li>
@@ -404,9 +431,9 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
 
                         <?php foreach($subset_range as $p) : ?>
                             <?php if($p == $halamanAktif) : ?>
-                                <li class="page-item active"><a class="page-link" href="?halaman=<?= $p ?><?= $param2; ?><?= $param3; ?>"><?= $p ?></a></li>
+                                <li class="page-item active"><a class="page-link" href="?halaman=<?= $p ?><?= $param; ?>"><?= $p ?></a></li>
                             <?php else : ?>
-                                <li class="page-item"><a class="page-link" href="?halaman=<?= $p ?><?= $param2; ?><?= $param3; ?>"><?= $p ?></a></li>
+                                <li class="page-item"><a class="page-link" href="?halaman=<?= $p ?><?= $param; ?>"><?= $p ?></a></li>
                             <?php endif; ?>
                         <?php endforeach; ?>
 
@@ -417,7 +444,7 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                         <!-- tombol next -->
                         <?php if($halamanAktif < $jumlahHalaman) : ?>
                             <li class="page-item">
-                                <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?><?= $param2; ?><?= $param3; ?>" aria-label="Next">
+                                <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?><?= $param; ?>" aria-label="Next">
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -431,7 +458,7 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
 
                         <!-- halaman terakhir -->
                         <li class="page-item">
-                            <a class="page-link" href="?halaman=<?= $jumlahHalaman; ?><?= $param2; ?><?= $param3; ?>">Terakhir</a>
+                            <a class="page-link" href="?halaman=<?= $jumlahHalaman; ?><?= $param; ?>">Terakhir</a>
                         </li>
                     </ul>
                 </nav>

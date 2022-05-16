@@ -34,9 +34,18 @@ $(document).ready(function() {
         });
     }
 
+    // jika ada get filter rentang sinyal
+    if ($_GET['signal_min'] && $_GET['signal_max']) {
+        var signalMin = $_GET['signal_min'];
+        var signalMax = $_GET['signal_max'];
+
+        $("#fromSinyal").val(signalMin);
+        $("#toSinyal").val(signalMax);
+    }
+
 })
 
-// event saat klik tombol cari
+// event saat klik tombol filter date
 $("#dateSubmit").click(function(){
     // ambil nilai dari input
     var filterDate = $("#filterDate").val();
@@ -44,5 +53,15 @@ $("#dateSubmit").click(function(){
     var endDate = filterDate.split(" - ")[1];
     if (startDate != "" && endDate != "") {
         location.href = "./index.php?from_date=" + startDate + "&to_date=" + endDate;
+    }
+});
+
+// event saat klik tombol filter rentang sinyal
+$("#sinyalSubmit").click(function(){
+    // ambil nilai dari input
+    var fromSinyal = $("#fromSinyal").val();
+    var toSinyal = $("#toSinyal").val();
+    if (fromSinyal != "" && toSinyal != "") {
+        location.href = "./index.php?signal_min=" + fromSinyal + "&signal_max=" + toSinyal;
     }
 });
