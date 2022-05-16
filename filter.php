@@ -3,7 +3,7 @@
 if (isset($_GET["from_date"]) && isset($_GET["to_date"])) {
     $from_date = $_GET["from_date"];
     $to_date = $_GET["to_date"];
-    $sql = "SELECT * FROM btc WHERE tanggal BETWEEN '".$from_date."' AND '".$to_date." 23:59:59' ORDER BY id DESC";
+    $sql .= " AND tanggal BETWEEN '".$from_date."' AND '".$to_date." 23:59:59'";
     $param .= "&from_date=".$from_date."&to_date=".$to_date;
 } else {
     $param .= "";
@@ -13,7 +13,7 @@ if (isset($_GET["from_date"]) && isset($_GET["to_date"])) {
 if (isset($_GET["signal_min"]) && isset($_GET["signal_max"])) {
     $signal_min = $_GET["signal_min"];
     $signal_max = $_GET["signal_max"];
-    $sql = "SELECT * FROM btc WHERE sinyal BETWEEN ".$signal_min." AND ".$signal_max." ORDER BY id DESC";
+    $sql .= " AND sinyal BETWEEN ".$signal_min." AND ".$signal_max."";
     $param .= "&signal_min=".$signal_min."&signal_max=".$signal_max;
 } else {
     $param .= "";
@@ -23,7 +23,7 @@ if (isset($_GET["signal_min"]) && isset($_GET["signal_max"])) {
 if (isset($_GET["harga_min"]) && isset($_GET["harga_max"])) {
     $harga_min = $_GET["harga_min"];
     $harga_max = $_GET["harga_max"];
-    $sql = "SELECT * FROM btc WHERE hargaidr BETWEEN ".$harga_min." AND ".$harga_max." ORDER BY id DESC";
+    $sql .= " AND hargaidr BETWEEN ".$harga_min." AND ".$harga_max."";
     $param .= "&harga_min=".$harga_min."&harga_max=".$harga_max;
 } else {
     $param .= "";
@@ -33,7 +33,7 @@ if (isset($_GET["harga_min"]) && isset($_GET["harga_max"])) {
 if (isset($_GET["harga_usd_min"]) && isset($_GET["harga_usd_max"])) {
     $harga_usd_min = $_GET["harga_usd_min"];
     $harga_usd_max = $_GET["harga_usd_max"];
-    $sql = "SELECT * FROM btc WHERE hargausdt BETWEEN ".$harga_usd_min." AND ".$harga_usd_max." ORDER BY id DESC";
+    $sql .= " AND hargausdt BETWEEN ".$harga_usd_min." AND ".$harga_usd_max."";
     $param .= "&harga_usd_min=".$harga_usd_min."&harga_usd_max=".$harga_usd_max;
 } else {
     $param .= "";
@@ -42,7 +42,7 @@ if (isset($_GET["harga_usd_min"]) && isset($_GET["harga_usd_max"])) {
 // filter by level
 if (isset($_GET["level"])) {
     $level = $_GET["level"];
-    $sql = "SELECT * FROM btc WHERE level = '".$level."' ORDER BY id DESC";
+    $sql .= " AND level = '".$level."'";
     $param .= "&level=".$level;
 } else {
     $param .= "";

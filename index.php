@@ -1,14 +1,14 @@
 <?php
 include_once("conn.php");
 
-$sql = "SELECT * FROM btc ORDER BY id DESC";
+$sql = "SELECT * FROM btc WHERE id != ''";
 
 $param = "";
 
 // search for pagination
 if (isset($_GET["search"])) {
     $search = $_GET["search"];
-    $sql = "SELECT * FROM btc WHERE jenis LIKE '%".$search."%' ORDER BY id DESC";
+    $sql .= " AND jenis LIKE '%".$search."%'";
     $param .= "&search=".$search;
 } else {
     $param .= "";
@@ -16,6 +16,8 @@ if (isset($_GET["search"])) {
 
 // filter date
 include_once("filter.php");
+
+$sql .= ' ORDER BY id DESC';
 
 // konfigurasi pagination
 $jumlahDataPerHalaman = 100;

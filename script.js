@@ -91,6 +91,12 @@ $(document).ready(function() {
 
 })
 
+// variabel current url
+var url = window.location.href;
+if (window.location.search == "") {
+    url = url + "?halaman=1";
+}
+
 // event saat klik tombol filter date
 $("#dateSubmit").click(function(){
     // ambil nilai dari input
@@ -98,7 +104,7 @@ $("#dateSubmit").click(function(){
     var startDate = filterDate.split(" - ")[0];
     var endDate = filterDate.split(" - ")[1];
     if (startDate != "" && endDate != "") {
-        location.href = "./index.php?from_date=" + startDate + "&to_date=" + endDate;
+        location.href = url + "&from_date=" + startDate + "&to_date=" + endDate;
     }
 });
 
@@ -137,6 +143,6 @@ $("#levelSubmit").click(function(){
     // ambil nilai dari input
     var level = $("#level").val();
     if (level != "") {
-        location.href = "./index.php?level=" + level;
+        location.href = url + "&level=" + level;
     }
 });
