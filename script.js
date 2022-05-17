@@ -114,7 +114,7 @@ $("#sinyalSubmit").click(function(){
     var fromSinyal = $("#fromSinyal").val();
     var toSinyal = $("#toSinyal").val();
     if (fromSinyal != "" && toSinyal != "") {
-        location.href = "./index.php?signal_min=" + fromSinyal + "&signal_max=" + toSinyal;
+        location.href = url + "&signal_min=" + fromSinyal + "&signal_max=" + toSinyal;
     }
 });
 
@@ -124,7 +124,7 @@ $("#hargaSubmit").click(function(){
     var fromHarga = $("#hargaMin").val();
     var toHarga = $("#hargaMax").val();
     if (fromHarga != "" && toHarga != "") {
-        location.href = "./index.php?harga_min=" + fromHarga + "&harga_max=" + toHarga;
+        location.href = url + "&harga_min=" + fromHarga + "&harga_max=" + toHarga;
     }
 });
 
@@ -134,7 +134,7 @@ $("#hargaUSDSubmit").click(function(){
     var fromHarga = $("#hargaMinUSD").val();
     var toHarga = $("#hargaMaxUSD").val();
     if (fromHarga != "" && toHarga != "") {
-        location.href = "./index.php?harga_usd_min=" + fromHarga + "&harga_usd_max=" + toHarga;
+        location.href = url + "&harga_usd_min=" + fromHarga + "&harga_usd_max=" + toHarga;
     }
 });
 
