@@ -540,6 +540,6 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
         <!-- My JS -->
-        <script src="js/script.js"></script>
+        <script src="js/filter.js"></script>
     </body>
 </html>

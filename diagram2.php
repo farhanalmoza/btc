@@ -10,7 +10,7 @@ include_once("conn.php");
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Penambangan Sinyal Harian INDODAX</title>
+        <title>Diagram 2 Level & Tanggal Menurut Jenis</title>
         
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
@@ -83,12 +83,7 @@ include_once("conn.php");
         <!-- Chart JS -->
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-        <!-- date range picker -->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-
         <!-- My JS -->
-        <script src="js/script.js"></script>
         <script src="js/diagram2.js"></script>
     </body>
 </html>
