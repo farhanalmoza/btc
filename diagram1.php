@@ -27,7 +27,11 @@ include_once("conn.php");
                 <div class="sidebar-heading border-bottom bg-light">Farkhan | BTC</div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="index.php">Tabel BTC</a>
-                    <a class="list-group-item list-group-item-action list-group-item-primary p-3 active" href="diagram.php">Diagram</a>
+                    <a class="list-group-item list-group-item-action list-group-item-primary p-3 active" href="diagram1.php">Diagram 1</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram2.php">Diagram 2</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram3.php">Diagram 3</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram4.php">Diagram 4</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram5.php">Diagram 5</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -42,13 +46,10 @@ include_once("conn.php");
 
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="text-center">Diagram BTC</h1>
+                    <h1 class="text-center">Diagram 1 Level & Tanggal</h1>
 
-                    <!-- Diagram 1 Level & Tanggal -->
                     <div class="card mt-4">
-                        <div class="card-body">
-                            <h3 class="text-center">Diagram 1 Level & Tanggal</h3>
-                            
+                        <div class="card-body">                            
                             <div class="mb-3 row">
                                 <label class="col-sm-2 col-form-label">Level</label>
                                 <div class="col-sm-7">
@@ -63,29 +64,6 @@ include_once("conn.php");
 
                             <div>
                                 <canvas id="diagram1"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Diagram 2 Level dan Tanggal menurut jenis -->
-                    <div class="card mt-4">
-                        <div class="card-body">
-                            <h3 class="text-center">Diagram 2 Level & Tanggal Menurut Jenis</h3>
-                            
-                            <div class="mb-3 row">
-                                <label class="col-sm-2 col-form-label">Level</label>
-                                <div class="col-sm-7">
-                                <select class="form-select" id="levelDiagram2">
-                                    
-                                </select>
-                                </div>
-                                <div class="col-sm-2">
-                                    <button type="button" class="btn btn-primary" id="levelDiagram2Submit">Pilih</button>
-                                </div>
-                            </div>
-
-                            <div>
-                                <canvas id="diagram2"></canvas>
                             </div>
                         </div>
                     </div>
@@ -111,6 +89,6 @@ include_once("conn.php");
 
         <!-- My JS -->
         <script src="js/script.js"></script>
-        <script src="js/diagram.js"></script>
+        <script src="js/diagram1.js"></script>
     </body>
 </html>

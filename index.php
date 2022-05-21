@@ -68,7 +68,11 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                 <div class="sidebar-heading border-bottom bg-light">Farkhan | BTC</div>
                 <div class="list-group list-group-flush">
                     <a class="list-group-item list-group-item-action list-group-item-primary p-3 active" href="index.php">Tabel BTC</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram.php">Diagram</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram1.php">Diagram 1</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram2.php">Diagram 2</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram3.php">Diagram 3</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram4.php">Diagram 4</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram5.php">Diagram 5</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
