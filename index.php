@@ -55,7 +55,7 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
         <link href="css/styles.css" rel="stylesheet" />
 
         <!-- My CSS -->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/color.css">
         <!-- jQuery UI -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <!-- Date Range Picker -->
@@ -67,8 +67,8 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Farkhan | BTC</div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-primary p-3 active" href="#!">Tabel BTC</a>
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Shortcuts</a>
+                    <a class="list-group-item list-group-item-action list-group-item-primary p-3 active" href="index.php">Tabel BTC</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram.php">Diagram</a>
                 </div>
             </div>
             <!-- Page content wrapper-->
@@ -525,7 +525,7 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="js/sidebar.js"></script>
 
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -536,6 +536,6 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
         <!-- My JS -->
-        <script src="./script.js"></script>
+        <script src="js/script.js"></script>
     </body>
 </html>

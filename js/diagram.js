@@ -1,0 +1,117 @@
+// ambil daftar level
+$.ajax({
+    url: "./getAll.php",
+    type: "POST",
+    dataType: "json",
+    success: function(data) {
+        const levels = [];
+        data.forEach(element => {
+            levels.push(element.level);
+        });
+
+        // unikkan daftar level
+        var uniqueLevels = [...new Set(levels)];
+        
+        // tambahkan option pada select level
+        var i = 0;
+        uniqueLevels.forEach(element => {
+            $("#levelDiagram1").append(`<option value="${i}">${element}</option>`);
+            i++;
+        });
+
+        // jika ada get level
+        if ($_GET['level']) {
+            var level = $_GET['level'];
+            $("#levelDiagram1").val(level);
+        }
+    }
+})
+
+var parts = window.location.search.substr(1).split("&");
+var $_GET = {};
+for (var i = 0; i < parts.length; i++) {
+    var temp = parts[i].split("=");
+    $_GET[decodeURIComponent(temp[0])] = decodeURIComponent(temp[1]);
+}
+
+var idLevel = $_GET['level'];
+
+$("#levelDiagram1Submit").click(function(){
+    // ambil nilai dari input
+    idLevel = $("#levelDiagram1").val();
+
+    location.href = "./diagram.php?level=" + idLevel;
+});
+
+// diagram 1 (level dan tanggal)
+$.ajax({
+    url: "./getAll.php",
+    type: "POST",
+    dataType: "json",
+    success: function(data) {
+        const tanggal = [];
+        const level = [];
+        data.forEach(element => {
+            // date without time
+            var date = element.tanggal;
+            var onlyDate = date.split(" ");
+            var onlyDate = onlyDate[0];
+            tanggal.push(onlyDate);
+
+            // level
+            level.push(element.level);
+        });
+
+        // unikkan daftar tanggal
+        var uniqueTanggal = [...new Set(tanggal)];
+        // drop tanggal 0000-00-00
+        uniqueTanggal.shift();
+
+        // unikkan daftar level
+        var uniqueLevel = [...new Set(level)];
+        // console.log(uniqueLevel);
+
+        // hitung jumlah level per tanggal (perhari) dan per level (perhari) 
+        var jumlahLevelPerTanggal = [];
+        var jumlahLevelPerLevel = [];
+        uniqueTanggal.forEach(tanggal => {
+            var jumlahLevelPerTanggalPerLevel = [];
+            uniqueLevel.forEach(level => {
+                var jumlahLevel = 0;
+                data.forEach(element => {
+                    var date = element.tanggal;
+                    var onlyDate = date.split(" ");
+                    var onlyDate = onlyDate[0];
+                    if (onlyDate == tanggal && element.level == level) {
+                        jumlahLevel++;
+                    }
+                });
+                jumlahLevelPerTanggalPerLevel.push(jumlahLevel);
+            });
+            jumlahLevelPerTanggal.push(jumlahLevelPerTanggalPerLevel);
+        });
+
+        const dataDiagram = {
+            labels: uniqueTanggal,
+            datasets: [
+                {
+                    label: uniqueLevel[idLevel],
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: jumlahLevelPerTanggal[idLevel],
+                }
+            ]
+        };
+        
+        const config = {
+            type: 'line',
+            data: dataDiagram,
+            options: {}
+        };
+        
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    }
+})

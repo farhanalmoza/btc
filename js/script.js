@@ -63,7 +63,7 @@ $(document).ready(function() {
 
     // ambil daftar level
     $.ajax({
-        url: "./getLevel.php",
+        url: "./getAll.php",
         type: "POST",
         dataType: "json",
         success: function(data) {
