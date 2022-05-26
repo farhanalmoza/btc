@@ -1,8 +1,4 @@
-<?php
-/**
- * using mysqli_connect for database connection
- */
- 
+<?php 
 // koneksi ke database
 $conn = mysqli_connect("localhost", "root", "", "catata33_575");
 

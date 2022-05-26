@@ -172,7 +172,15 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
                     <!-- card table -->
                     <div class="card mt-4 mb-5">
                         <div class="card-body" id="table-data">
-                            <table class="table">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-primary" onclick="generatePDF()">Export PDF</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-success" onclick="generateExcel()">Export Excel</button>
+                                </div>
+                            </div>
+                            <table class="table" id="tabel-penambangan">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -539,7 +547,11 @@ $results = query($sql . " LIMIT $awalData, $jumlahDataPerHalaman");
         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
+        <!-- pdf -->
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
         <!-- My JS -->
         <script src="js/filter.js"></script>
+        <script src="js/export.js"></script>
     </body>
 </html>
