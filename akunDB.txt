@@ -1,0 +1,4 @@
+dbname: u1555160_bitcoin
+host: localhost
+db username: u1555160_farkhan
+db password: 1pemwebBitcoin*
