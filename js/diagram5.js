@@ -9,7 +9,7 @@ $(document).ready(function() {
             startDate: startDate,
             endDate: endDate,
             minDate: '2022-04-29',
-            maxDate: '2022-05-11',
+            maxDate: '2022-06-03',
             locale: {
                 format: 'YYYY-MM-DD'
             }
@@ -18,9 +18,9 @@ $(document).ready(function() {
         // terapkan daterangerpicker
         $('#dateRange').daterangepicker({
             startDate: '2022-04-29',
-            endDate: '2022-05-11',
+            endDate: '2022-06-03',
             minDate: '2022-04-29',
-            maxDate: '2022-05-11',
+            maxDate: '2022-06-03',
             locale: {
                 format: 'YYYY-MM-DD'
             }

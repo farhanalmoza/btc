@@ -26,7 +26,8 @@ include_once("conn.php");
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Farkhan | BTC</div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="index.php">Tabel BTC</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="index.php">Dashboard</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="tabel.php">Tabel BTC</a>
                     <a class="list-group-item list-group-item-action list-group-item-primary p-3 active" href="diagram1.php">Diagram 1</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram2.php">Diagram 2</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram3.php">Diagram 3</a>

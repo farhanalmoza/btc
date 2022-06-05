@@ -28,7 +28,8 @@ include_once("conn.php");
             <div class="border-end bg-white" id="sidebar-wrapper">
                 <div class="sidebar-heading border-bottom bg-light">Farkhan | BTC</div>
                 <div class="list-group list-group-flush">
-                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="index.php">Tabel BTC</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="index.php">Dashboard</a>
+                    <a class="list-group-item list-group-item-action list-group-item-light p-3" href="tabel.php">Tabel BTC</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram1.php">Diagram 1</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram2.php">Diagram 2</a>
                     <a class="list-group-item list-group-item-action list-group-item-light p-3" href="diagram3.php">Diagram 3</a>
@@ -48,7 +49,7 @@ include_once("conn.php");
 
                 <!-- Page content-->
                 <div class="container-fluid">
-                    <h1 class="text-center">Diagram 3 Volume & Tanggal (Datepicker) Menurut Jenis</h1>
+                    <h1 class="text-center">Diagram 4 Volume & Tanggal (Datepicker) Menurut Jenis</h1>
 
                     <div class="card mt-4">
                         <div class="card-body">  
